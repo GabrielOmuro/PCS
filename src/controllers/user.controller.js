@@ -48,7 +48,7 @@ class userController {
             })
 
             if (!validUser || validUser.password !== password) {
-                throw new Error("It was not able to login, verify if your email or password is correct!")
+                return response.status(404).send({message: "It was not able to login, verify if your email or password is correct!"})
             }
             const payload = {
                 id: validUser.id,
@@ -90,9 +90,29 @@ class userController {
             await user.save()
 
             return response.status(200).send({ message: 'User data successfuly updated!' })
-        } catch(error){
+        } catch (error) {
             console.log(error)
-            return response.status(400).send({message: 'User data could not update!', error})
+            return response.status(400).send({ message: 'User data could not update!', error })
+        }
+    }
+    async updateUserStatus(request, response) {
+        try {
+            const { id } = request.params
+            const { status } = request.body
+            const user = await User.findByPk(id)
+            
+            if (!user) {
+                return response.status(404).send({ message: 'User not found!' })
+            }
+            
+            if(status){
+                user.status = status
+            }
+            await user.save()
+
+            return response.status(200).send(user)
+        } catch (error) {
+            return response.status(400).send({ message: 'User status could not update!', error })
         }
     }
 }
