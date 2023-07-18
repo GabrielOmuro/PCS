@@ -40,7 +40,7 @@ module.exports = {
       },
       dosage: {
         type: Sequelize.STRING,
-        allowNull: true,
+        allowNull: false,
       },
       unity_dosage: {
         type: Sequelize.ENUM( 'mg', 'mcg', 'g', 'mL', '%', 'Outro' ),
@@ -70,6 +70,10 @@ module.exports = {
         allowNull: false
       },
       updated_at: {
+        type: Sequelize.DATE,
+        allowNull: false
+      },
+      deleted_at: {
         type: Sequelize.DATE,
         allowNull: false
       }

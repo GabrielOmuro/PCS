@@ -12,7 +12,7 @@ module.exports = {
       },
       user_id: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references: {
           model: {tableName: "users"},
           key: "id"
@@ -33,6 +33,7 @@ module.exports = {
       email: {
         type: Sequelize.STRING,
         allowNull: false,
+        unique: true
       },
       phone: {
         type: Sequelize.STRING,
@@ -89,8 +90,9 @@ module.exports = {
       updated_at: {
         type: Sequelize.DATE
       },
-      deleted: {
-        type: Sequelize.DATE
+      deletedAt: {
+        type: Sequelize.DATE,
+        field: 'deleted_at'
       }
     });
   },

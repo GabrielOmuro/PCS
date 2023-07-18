@@ -8,7 +8,6 @@ class userController {
     async createUser(request, response) {
         try {
             const { name, surname, gender, birth_date, cpf, phone, email, password } = request.body;
-            console.log(request.body)
 
             if (!name || !surname || !gender || !birth_date || !cpf || !phone || !email || !password) {
                 return response.status(400).send({ message: "Fill the inputs!" })
@@ -34,7 +33,7 @@ class userController {
             return response.status(201).send(data)
         } catch (error) {
             console.log(error.message)
-            return response.status(400).send({ message: "The user could not be loaded!" })
+            return response.status(400).send({ message: "The user could not be created!" })
         }
     }
     async userLogin(request, response) {
@@ -48,7 +47,7 @@ class userController {
             })
 
             if (!validUser || validUser.password !== password) {
-                return response.status(404).send({message: "It was not able to login, verify if your email or password is correct!"})
+                return response.status(404).send({ message: "It was not able to login, verify if your email or password is correct!" })
             }
             const payload = {
                 id: validUser.id,
@@ -100,13 +99,33 @@ class userController {
             const { id } = request.params
             const { status } = request.body
             const user = await User.findByPk(id)
-            
+
+            if (!user) {
+                return response.status(404).send({ message: 'User not found!' })    
+            }
+
+            if (status) {
+                user.status = status
+            }
+            await user.save()
+
+            return response.status(200).send('hahahhha')
+        } catch (error) {
+            return response.status(400).send({ message: 'User status could not update!', error })
+        }
+    }
+    async updateUserPassword(request, response) {
+        try {
+            const { id } = request.params
+            const { password } = request.body
+            const user = await User.findByPk(id)
+
             if (!user) {
                 return response.status(404).send({ message: 'User not found!' })
             }
-            
-            if(status){
-                user.status = status
+
+            if (password) {
+                user.password = password
             }
             await user.save()
 
@@ -114,6 +133,12 @@ class userController {
         } catch (error) {
             return response.status(400).send({ message: 'User status could not update!', error })
         }
+    }
+    async listUsersById(request, response) {
+        const { id } = request.params
+        const data = await User.findByPk(id)
+
+        return response.status(200).send(data)
     }
 }
 

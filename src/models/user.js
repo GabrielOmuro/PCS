@@ -1,34 +1,34 @@
-const { DataTypes } = require('sequelize');
+const { Sequelize } = require('sequelize');
 const { connection } = require('../database/connection.settings');
 
 const User = connection.define('User', {
   name: {
-    type: DataTypes.STRING,
+    type: Sequelize.STRING,
     allowNull: false,
     validate: {
       len: [2, 20],
     },
   },
   surname: {
-    type: DataTypes.STRING,
+    type: Sequelize.STRING,
     allowNull: false,
     validate: {
       len: [2, 20],
     },
   },
   gender: {
-    type: DataTypes.TEXT,
+    type: Sequelize.TEXT,
     allowNull: true,
   },
   birth_date: {
-    type: DataTypes.DATE,
+    type: Sequelize.DATE,
     allowNull: false,
     validate: {
       isDate: true,
     },
   },
   cpf: {
-    type: DataTypes.STRING,
+    type: Sequelize.STRING,
     allowNull: false,
     unique: true,
     validate: {
@@ -36,18 +36,18 @@ const User = connection.define('User', {
     },
   },
   phone: {
-    type: DataTypes.STRING,
+    type: Sequelize.STRING,
     allowNull: true,
   },
   email: {
-    type: DataTypes.STRING,
+    type: Sequelize.STRING,
     allowNull: false,
     validate: {
       isEmail: true,
     },
   },
   password: {
-    type: DataTypes.STRING,
+    type: Sequelize.STRING,
     allowNull: false,
     validate: {
       len: [8, 255],
@@ -55,7 +55,7 @@ const User = connection.define('User', {
     },
   },
   status: {
-    type: DataTypes.ENUM( 'active', 'inactive'),
+    type: Sequelize.ENUM( 'active', 'inactive'),
     allowNull: false,
     defaultValue: 'active',
   },

@@ -1,138 +1,139 @@
-const { connection } = require('../database/connection.settings')
+const { connection } = require('../database/connection.settings');
+const { User } = require('./user');
+const { Sequelize } = require('sequelize')
 
 const Deposit = connection.define('Deposit', {
   user_id: {
     type: Sequelize.INTEGER,
     allowNull: true,
     references: {
-      model: {tableName: "users"},
-      key: "id"
+      model: User,
+      key: 'id'
     }
   },
   corporate_name: {
-    type: VARCHAR(20),
+    type: Sequelize.STRING(20),
     allowNull: false,
     validate: {
-      len: [2, 20],
-    },
+      len: [2, 20]
+    }
   },
   cnpj: {
-    type: VARCHAR(20),
+    type: Sequelize.STRING(14),
     allowNull: false,
     validate: {
-      len: [2, 20],
-    },
+      len: [0, 14]
+    }
   },
   trading_name: {
-    type: VARCHAR(20),
+    type: Sequelize.STRING(20),
     allowNull: false,
     validate: {
-      len: [2, 20],
-    },
+      len: [2, 20]
+    }
   },
   email: {
-    type: VARCHAR(20),
+    type: Sequelize.STRING(20),
     allowNull: false,
     validate: {
-      len: [2, 20],
-    },
+      len: [2, 20]
+    }
   },
   phone: {
-    type: VARCHAR(20),
+    type: Sequelize.STRING(20),
     allowNull: true,
     validate: {
-      len: [2, 20],
-    },
+      len: [2, 20]
+    }
   },
   cellphone: {
-    type: VARCHAR(20),
+    type: Sequelize.STRING(20),
     allowNull: false,
     validate: {
-      len: [2, 20],
-    },
+      len: [2, 20]
+    }
   },
   cep: {
-    type: VARCHAR(20),
+    type: Sequelize.STRING(8),
     allowNull: false,
     validate: {
-      len: [2, 20],
-    },
+      len: [0, 8]
+    }
   },
   log: {
-    type: VARCHAR(20),
+    type: Sequelize.STRING(20),
     allowNull: false,
     validate: {
-      len: [2, 20],
-    },
+      len: [2, 20]
+    }
   },
   number: {
-    type: VARCHAR(20),
+    type: Sequelize.STRING(20),
     allowNull: false,
     validate: {
-      len: [2, 20],
-    },
+      len: [2, 20]
+    }
   },
-
   town: {
-    type: VARCHAR(20),
+    type: Sequelize.STRING(20),
     allowNull: false,
     validate: {
-      len: [2, 20],
-    },
+      len: [2, 20]
+    }
   },
   city: {
-    type: VARCHAR(20),
+    type: Sequelize.STRING(20),
     allowNull: false,
     validate: {
-      len: [2, 20],
-    },
+      len: [2, 20]
+    }
   },
   state: {
-    type: VARCHAR(20),
+    type: Sequelize.STRING(20),
     allowNull: false,
     validate: {
-      len: [2, 20],
-    },
+      len: [2, 20]
+    }
   },
   complement: {
-    type: VARCHAR(20),
+    type: Sequelize.STRING(20),
     allowNull: true,
     validate: {
-      len: [2, 20],
-    },
+      len: [2, 20]
+    }
   },
   latitude: {
-    type: VARCHAR(20),
+    type: Sequelize.STRING(20),
     allowNull: true,
     validate: {
-      len: [2, 20],
-    },
+      len: [2, 20]
+    }
   },
   longitude: {
-    type: VARCHAR(20),
+    type: Sequelize.STRING(20),
     allowNull: true,
     validate: {
-      len: [2, 20],
-    },
+      len: [2, 20]
+    }
   },
   status: {
-    type: BOOLEAN,
+    type: Sequelize.ENUM( 'active', 'inactive'),
     allowNull: false,
-    defaultValue: 'active',
+    defaultValue: 'active'
   },
-},
-  { underscored: true, paranoid: true  });
+});
 
 Deposit.associate = (models) => {
   Deposit.belongsTo(models.User, {
     foreignKey: 'user_id',
     allowNull: false
   });
-  Deposit.hasMany(models.Medicines, {
+  Deposit.hasMany(models.Medicine, {
     foreignKey: 'deposit_id',
     allowNull: false
   });
 };
+
 module.exports = {
   Deposit
-}
+};

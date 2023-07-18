@@ -1,81 +1,76 @@
-const { connection } = require('../database/connection.settings')
+const { connection } = require('../database/connection.settings');
+const { Deposit } = require('./deposit');
+const { User } = require('./user');
+const { Sequelize } = require('sequelize')
 
 const Medicine = connection.define('Medicine', {
     deposit_id: {
-        type: INTEGER,
+        type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-            model: {tableName: "deposits"},
-            key: "id"
+            model: Deposit,
+            key: 'id'
         }
     },
     user_id: {
-        type: INTEGER,
+        type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-            model: {tableName: "users"},
-            key: "id"
+            model: User,
+            key: 'id'
         }
     },
     medicine_name: {
-        type: VARCHAR(20),
+        type: Sequelize.STRING(20),
         allowNull: false,
         validate: {
-            len: [2, 20],
-        },
+            len: [2, 20]
+        }
     },
     lab_name: {
-        type: VARCHAR(20),
+        type: Sequelize.STRING(20),
         allowNull: false,
         validate: {
-            len: [2, 20],
-        },
-    },
-    lab_name: {
-        type: VARCHAR(20),
-        allowNull: false,
-        validate: {
-            len: [2, 20],
-        },
+            len: [2, 20]
+        }
     },
     dosage: {
-        type: VARCHAR(20),
+        type: Sequelize.STRING(20),
         allowNull: false,
         validate: {
-            len: [2, 20],
-        },
+            len: [2, 20]
+        }
     },
     unity_dosage: {
-        type: BOOLEAN,
+        type: Sequelize.ENUM( 'mg', 'mcg', 'g', 'mL', '%', 'Outro' ),
         allowNull: false,
-        defaultValue: 'mg',
+        defaultValue: 'mg'
     },
     type: {
-        type: BOOLEAN,
+        type: Sequelize.ENUM( 'controlled medicine', 'non-controlled medicine' ),
         allowNull: false,
-        defaultValue: 'controlled medicine',
+        defaultValue: 'controlled medicine'
     },
     unity_price: {
-        type: VARCHAR(20),
+        type: Sequelize.STRING(20),
         allowNull: false,
         validate: {
-            len: [2, 20],
-        },
+            len: [2, 20]
+        }
     },
     quantity: {
-        type: VARCHAR(20),
+        type: Sequelize.STRING(20),
         allowNull: false,
         validate: {
-            len: [2, 20],
-        },
+            len: [2, 20]
+        }
     },
     status: {
-        type: BOOLEAN,
+        type: Sequelize.BOOLEAN,
         allowNull: false,
-        defaultValue: 'active',
-    },
-},
-    { underscored: true, paranoid: true  });
+        defaultValue: 'active'
+    }
+}, { underscored: true });
 
 Medicine.associate = (models) => {
     Medicine.belongsTo(models.Deposit, {
@@ -87,6 +82,7 @@ Medicine.associate = (models) => {
         allowNull: false
     });
 };
+
 module.exports = {
     Medicine
-}
+};
