@@ -11,7 +11,6 @@ class depositController {
             }
 
 
-
             const eCNPJ = await Deposit.findOne({ where: { cnpj } });
             if (eCNPJ) {
                 return response.status(409).json({ message: 'CNPJ already registered' });
@@ -40,7 +39,6 @@ class depositController {
                 latitude,
                 longitude
             })
-
             return response.status(201).send(data)
         } catch (error) {
             console.log(error.message)

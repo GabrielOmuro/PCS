@@ -9,9 +9,7 @@ class medicineController {
                 !quantity) {
                 return response.status(400).send({ message: "Fill the inputs!" })
             }
-
-            console.log(deposit_id)
-
+            
             const eName = await Medicine.findOne({ where: { medicine_name } });
             if (eName) {
                 return response.status(409).json({ message: 'Medicine name already registered' });
@@ -39,7 +37,7 @@ class medicineController {
     async updateMedicineData(request, response) {
         try {
             const { id } = request.params
-            const { user_id, trading_name, email, phone, cellphone, complement, latitude, longitude } = request.body
+            const { description, unity_price, quantity } = request.body
 
             const medicine = await Medicine.findByPk(id)
 
@@ -47,20 +45,12 @@ class medicineController {
                 return response.status(404).send({ message: 'Deposit not found!' })
             }
 
-            if (trading_name) {
-                medicine.trading_name = trading_name
-            } if (email) {
-                medicine.email = email
-            } if (phone) {
-                medicine.phone = phone
-            } if (cellphone) {
-                medicine.cellphone = cellphone
-            } if (complement) {
-                medicine.complement = complement
-            } if (latitude) {
-                medicine.latitude = latitude
-            } if (longitude) {
-                medicine.longitude = longitude
+            if (description) {
+                medicine.description = description
+            } if (unity_price) {
+                medicine.unity_price = unity_price
+            } if (quantity) {
+                medicine.quantity = quantity
             }
 
             await medicine.save()
@@ -71,34 +61,13 @@ class medicineController {
             return response.status(400).send({ message: 'Medicine data could not update!', error })
         }
     }
-    async updateMedicineStatus(request, response) {
-        try {
-            const { id } = request.params
-            const { status } = request.body
-            const medicine = await Medicine.findByPk(id)
-
-            if (!medicine) {
-                return response.status(404).send({ message: 'Medicine not found!' })
-            }
-
-            if (status) {
-                medicine.status = status
-            }
-            await medicine.save()
-
-            return response.status(200).send(medicine)
-        } catch (error) {
-            return response.status(400).send({ message: 'Deposit status could not update!', error })
-        }
-    }
     async listMedicine(request, response) {
         try {
-            const { status } = request.query;
-            console.log(status)
+            const { type } = request.query;
             let list = {};
 
-            if (status) {
-                list = { status };
+            if (type) {
+                list = { type };
             }
 
             const medicine = await Medicine.findAll({

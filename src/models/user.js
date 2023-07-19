@@ -59,7 +59,7 @@ const User = connection.define('User', {
     allowNull: false,
     defaultValue: 'active',
   },
-}, { underscored: true, paranoid: true });
+}, { underscored: true });
 
 User.associate = (models) => {
   User.hasMany(models.Deposit, {

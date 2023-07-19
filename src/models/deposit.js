@@ -29,7 +29,7 @@ const Deposit = connection.define('Deposit', {
     type: Sequelize.STRING(20),
     allowNull: false,
     validate: {
-      len: [2, 20]
+      len: [2, 50]
     }
   },
   email: {

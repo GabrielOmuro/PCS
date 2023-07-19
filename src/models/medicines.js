@@ -69,14 +69,10 @@ const Medicine = connection.define('Medicine', {
         type: Sequelize.BOOLEAN,
         allowNull: false,
         defaultValue: 'active'
-    }
+    },
 }, { underscored: true });
 
 Medicine.associate = (models) => {
-    Medicine.belongsTo(models.Deposit, {
-        foreignKey: 'deposit_id',
-        allowNull: false
-    });
     Medicine.belongsTo(models.User, {
         foreignKey: 'user_id',
         allowNull: false
