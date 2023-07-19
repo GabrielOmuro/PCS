@@ -43,3 +43,13 @@ To run the PCS on your local machine, follow these steps:
 We welcome feedback and contributions from users and developers alike. If you have any suggestions, bug reports, or feature requests, please feel free to open an issue or submit a pull request on the PCS GitHub repository.
 
 We believe that the Pharmacy Central System (PCS) will revolutionize medication management, enhancing efficiency, accuracy, and patient safety in healthcare facilities.
+
+## Here is my video instruction
+
+Opa, pessoal! Meu nome é Gabriel Akira Omuro e vim aqui apresentar o meu projeto do módulo 2 de backend, apresentarei o meu projeto em 5 tópicos, 
+o primeiro tópico é Qual o objetivo do sistema,
+Quis desenvolver uma aplicação rápida e funcional para uma empresa fictícea chamada Pharmacy Central System.
+ o segundo tópico é o que deve ser realizado para executar o sistema, Primeiro tem que instalar o postman ou o thunder client para fazer a requisição, todos as bibliotecas que devem ser instaladas estão no meu readme, junto com as tecnologias que eu criei e outras intruções.
+o terceiro tópico é como me organizei para começar a desenvolver, eu fiz uma organização no trello, que vai aparecer aí na tela.
+o quarto tópico é quais branches eu criei, bom eu fiz tudo na main pois o coordenador Pedro do projeto disse que não haveria necessidade.
+o quinto tópico é se eu acho que faltou algo no meu código que eu poderia melhorar, eu acho que nós sempre podemos melhorar algo mas no meu caso acho que um sistema para deletar um usuário e a alteração de mais dados do usuário.
