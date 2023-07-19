@@ -32,20 +32,11 @@ To run the PCS on your local machine, follow these steps:
 1. Ensure you have Node.js and PostgreSQL installed.
 2. Clone the PCS repository from GitHub: [https://github.com/GabrielOmuro/PCS.git].
 3. Navigate to the project directory in your terminal.
-4. Install the project dependencies by running the command: `npm install`.
+4. Install the project dependencies by running the command: `npm install cors dotenv express jsonwbtoken pg pg-connection-string sequelize` e `npm install sequelize-cli nodemon --save-dev` to run nodemon and sequelize-cli on devDependencies.
 5. Set up the PostgreSQL database and update the database configuration in the `.env` file.
-6. Run the database migrations using the command: `npm run migrate`.
-7. Start the server by running: `npm start`.
-8. Access the PCS application in your web browser at: `http://localhost:3000`.
-
-## Future Enhancements
-
-The Pharmacy Central System is continuously evolving, and future improvements may include:
-
-- **User Authentication**: Implementing secure user authentication to ensure data privacy and restricted access to authorized personnel only.
-- **Mobile Application**: Developing a mobile application version of PCS to facilitate medication management on the go.
-- **Integration with External Systems**: Integrating PCS with external systems, such as electronic health records (EHR), to streamline data exchange and enhance interoperability.
-- **Automated Alerts**: Implementing automated alerts for medication recalls, expiring medications, or potential drug interactions to improve patient safety.
+6. Run the database migrations using the command: `npx sequelize-cli db:migrate`.
+7. Start the server by running: `npm run dev`
+8. Access the PCS application in your request app: `http://localhost:5000`.
 
 ## Feedback and Contributions
 
