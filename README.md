@@ -32,7 +32,7 @@ To run the PCS on your local machine, follow these steps:
 1. Ensure you have Node.js and PostgreSQL installed.
 2. Clone the PCS repository from GitHub: [https://github.com/GabrielOmuro/PCS.git].
 3. Navigate to the project directory in your terminal.
-4. Install the project dependencies by running the command: `npm install cors dotenv express jsonwbtoken pg pg-connection-string sequelize` e `npm install sequelize-cli nodemon --save-dev` to run nodemon and sequelize-cli on devDependencies.
+4. Install the project dependencies by running the command: `npm install cors dotenv express jsonwbtoken pg pg-connection-string sequelize` and `npm install sequelize-cli nodemon --save-dev` to run nodemon and sequelize-cli on devDependencies.
 5. Set up the PostgreSQL database and update the database configuration in the `.env` file.
 6. Run the database migrations using the command: `npx sequelize-cli db:migrate`.
 7. Start the server by running: `npm run dev`
