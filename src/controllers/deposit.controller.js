@@ -1,4 +1,5 @@
 const { Deposit } = require('../models/deposit')
+const { Medicine } = require('../models/medicines')
 
 class depositController {
     async createDeposit(request, response) {
@@ -124,31 +125,36 @@ class depositController {
         try {
             const { id } = request.params
             const data = await Deposit.findByPk(id)
-    
+
             return response.status(200).send(data)
         } catch (error) {
             console.log(error.message);
             return response.status(400).send({ message: 'Was not possible to list the deposits!' });
         }
     }
-    async deleteDeposit(request, response){
+    async deleteDeposit(request, response) {
         const { id } = request.params
         try {
             const deposit = await Deposit.findByPk(id)
-            console.log(deposit.status)
+            const eMedicines = await Medicine.findOne({ where: { deposit_id: id } });
 
-            if(!deposit){
-                return response.status(404).send({message: 'Deposit not found!'})
+
+            if (eMedicines) {
+                return response.status(400).send({ message: 'Could not delete the deposit, it has medicines stored in it.' });
+            }
+            if (!deposit) {
+                return response.status(404).send({ message: 'Deposit not found!' })
             }
 
-            if(deposit.status !== 'inactive' ){
-                return response.status(400).send({message: 'Could not delete the deposit, maybe it is active or it has some medicines in it.'})
-            }else{
+            if (deposit.status !== 'inactive') {
+                return response.status(400).send({ message: 'Could not delete the deposit, maybe it is active or it has some medicines in it.' })
+            } else {
                 await deposit.destroy()
-                return response.status(200).send({message: 'Deposit successfuly deleted!'})
+                return response.status(200).send({ message: 'Deposit successfuly deleted!' })
             }
         } catch (error) {
-            return response.status(400).send({message: 'Could not delete the deposit!', error})
+            return response.status(400).send({ message: 'Could not delete the deposit!', error })
+            console.log(deposit_id)
         }
     }
 }

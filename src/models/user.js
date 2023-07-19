@@ -51,7 +51,7 @@ const User = connection.define('User', {
     allowNull: false,
     validate: {
       len: [8, 255],
-      // isStrongPassword: true,
+      isStrongPassword: true,
     },
   },
   status: {
